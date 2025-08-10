@@ -8,6 +8,8 @@ public class LevelGoal : MonoBehaviour
     public Camera mainCamera;
     public Transform newCameraPosition;
 
+    public int nextStageNumber = 2;
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -41,6 +43,13 @@ public class LevelGoal : MonoBehaviour
         if (mainCamera != null) 
         {
             mainCamera.transform.position = newCameraPosition.position;
+        }
+
+        //muzikaaa
+        MusicManager musicManager = FindFirstObjectByType<MusicManager>();
+        if (musicManager != null) 
+        {
+            musicManager.PlayStageMusicSmooth(nextStageNumber);
         }
 
         yield return new WaitForSecondsRealtime(1.0f);
