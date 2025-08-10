@@ -820,6 +820,7 @@ MonoBehaviour:
   stage1Music: {fileID: 8300000, guid: 7c84e3cc53a50e447a4b1e21a11f523e, type: 3}
   stage2Music: {fileID: 8300000, guid: 52ba977198a310145ace44a9e2016966, type: 3}
   stage3Music: {fileID: 8300000, guid: 7afd358c3ca9d264abff50fad6ab83af, type: 3}
+  ghostSpawnSFX: {fileID: 8300000, guid: 8cfb178fa45ffdd4c99c64e88ed5cd2a, type: 3}
 --- !u!4 &134444284
 Transform:
   m_ObjectHideFlags: 0

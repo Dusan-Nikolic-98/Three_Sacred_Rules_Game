@@ -16,6 +16,10 @@ public class GhostSpawner : MonoBehaviour
 
     public void SpawnGhosts()
     {
+        if (MusicManager.Instance != null) 
+        {
+            MusicManager.Instance.PlaySFX(MusicManager.Instance.ghostSpawnSFX);
+        }
 
         for (int i = 0; i < 3; i++) {
             Vector3 spawnPos = GetRandomEdgePosition();
@@ -27,7 +31,11 @@ public class GhostSpawner : MonoBehaviour
 
     public void SpawnGhostsFixed()
     {
-        for(int i = 0; i < 3; i++)
+        if (MusicManager.Instance != null)
+        {
+            MusicManager.Instance.PlaySFX(MusicManager.Instance.ghostSpawnSFX);
+        }
+        for (int i = 0; i < 3; i++)
         {
             Vector3 camPos = mainCam.transform.position;
             float camHeight = 2f * mainCam.orthographicSize;

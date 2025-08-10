@@ -4,18 +4,40 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
 
+    public static MusicManager Instance;
+
     public AudioClip stage1Music;
     public AudioClip stage2Music;
     public AudioClip stage3Music;
+
+    //za sound efekte
+    public AudioClip ghostSpawnSFX;
+    private AudioSource sfxSource; //za s.e.
 
     private AudioSource audioSource;
 
     private void Awake()
     {
-        //DontDestroyOnLoad(gameObject); //za kad budem imao vise scena
 
+        // da bude singlt
+        if (Instance == null) 
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        //DontDestroyOnLoad(gameObject); //za kad budem imao vise scena
+        //muzika
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.loop = true;
+        audioSource.playOnAwake = false;
+
+        //sfx
+        sfxSource = gameObject.AddComponent<AudioSource>();
+        sfxSource.loop = false;
         audioSource.playOnAwake = false;
     }
 
@@ -73,6 +95,15 @@ public class MusicManager : MonoBehaviour
             yield return null;
         }
 
+    }
+
+
+    public void PlaySFX(AudioClip clip)
+    {
+        if(clip != null)
+        {
+            sfxSource.PlayOneShot(clip);
+        }
     }
 
 }
