@@ -20,6 +20,10 @@ public class ImagesManager : MonoBehaviour
     public GameObject bubble3;
     public GameObject end_question;
 
+    //menu delovi
+    public GameObject menuScreenUI;
+    private bool isMenuActive = false;
+
     private void Awake()
     {
         if(deathScreenUI != null)
@@ -42,6 +46,8 @@ public class ImagesManager : MonoBehaviour
             bubble3.SetActive(false);
         if(end_question != null)
             end_question.SetActive(false);
+        if(menuScreenUI != null)
+            menuScreenUI.SetActive(false);
 
 
         if (cutscene != null && !skipCutscene)
@@ -69,6 +75,29 @@ public class ImagesManager : MonoBehaviour
             infoScreenUI.SetActive(!infoScreenUI.activeSelf);
 
         }
+        //za menu
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (!isMenuActive)
+            {
+                OpenMenu();
+            }
+            else 
+            {
+                CloseMenu();
+            }
+        }
+        if (isMenuActive) 
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                RestartGame();
+            }
+            else if (Input.GetKeyDown(KeyCode.X)) 
+            {
+                ExitGame();
+            }
+        }
     }
 
     private IEnumerator ShowIntroImage()
@@ -82,6 +111,41 @@ public class ImagesManager : MonoBehaviour
             introImage.SetActive(false);
             Time.timeScale = 1f;
         }
+    }
+
+    //za menu delovi
+    private void OpenMenu()
+    {
+        if (menuScreenUI == null) return;
+
+        menuScreenUI.SetActive(true);
+        Time.timeScale = 0f;
+        isMenuActive = true;
+
+        // da zatvori i info ako nije vec
+        if (infoScreenUI != null && infoScreenUI.activeSelf)
+            infoScreenUI.SetActive(false);
+    }
+
+    private void CloseMenu()
+    {
+        if (menuScreenUI == null) return;
+
+        menuScreenUI.SetActive(false);
+        Time.timeScale = 1f;
+        isMenuActive = false;
+    }
+
+    private void RestartGame()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void ExitGame()
+    {
+        Time.timeScale = 1f;
+        Application.Quit();
     }
 
 }
