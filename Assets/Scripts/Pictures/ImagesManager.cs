@@ -24,6 +24,9 @@ public class ImagesManager : MonoBehaviour
     public GameObject menuScreenUI;
     private bool isMenuActive = false;
 
+    public GameObject menu_info1;
+    public GameObject menu_info2;
+
     private void Awake()
     {
         if(deathScreenUI != null)
@@ -48,6 +51,10 @@ public class ImagesManager : MonoBehaviour
             end_question.SetActive(false);
         if(menuScreenUI != null)
             menuScreenUI.SetActive(false);
+        if(menu_info1 != null)
+            menu_info1.SetActive(false);
+        if(menu_info2 != null)
+            menu_info2.SetActive(false);
 
 
         if (cutscene != null && !skipCutscene)
@@ -106,9 +113,12 @@ public class ImagesManager : MonoBehaviour
         {
             Time.timeScale = 0f;
             introImage.SetActive(true);
-            yield return new WaitForSecondsRealtime(3f);
+            yield return new WaitForSecondsRealtime(6f);
 
             introImage.SetActive(false);
+            menu_info1.SetActive(true);
+            menu_info2.SetActive(true);
+
             Time.timeScale = 1f;
         }
     }
